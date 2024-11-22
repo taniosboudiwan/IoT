@@ -1,0 +1,183 @@
+\documentclass[a4paper,12pt]{article}
+
+
+% Packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{longtable}
+\usepackage{longtable}
+\usepackage{array} % For flexible column widths
+\usepackage{graphicx} % For resizing
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{booktabs} % Missing line for booktabs
+\usepackage{float}
+\usepackage{longtable}  % If you want tables to span multiple pages
+\usepackage{minted}
+\usepackage{geometry}
+\usepackage{amsmath}
+\geometry{a4paper, margin=1in}
+% Title Section
+\title{Collisions and Packet Delivery Ratio}
+\author{Tanios Bou Diwan 211445  \\ \texttt{tanios.boudiwan@net.usj.edu.lb}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% Table of Contents and List of Figures
+\tableofcontents
+\listoffigures
+%\listoftables
+\newpage
+\section{What are the advantages of a random access in a wireless IoT context? What are the shortcomings?}
+\subsection{Advantages of Random Access in Wireless IoT Context}
+\begin{itemize}
+    \item \textbf{Simplicity:} Random access protocols like ALOHA are relatively easy to implement. They do not require complex scheduling or coordination mechanisms.
+    \item \textbf{Flexibility:} Random access allows devices to transmit data whenever they have information to send, without waiting for a predetermined time slot.
+    \item \textbf{Facilitates Low-Power Operation:} Devices can transmit only when necessary, which aligns well with energy-efficient designs, allowing for longer battery life in IoT applications where power conservation is critical.
+    \item \textbf{Scalability:} Random access protocols can accommodate a varying number of devices without needing significant changes to the network infrastructure. As new devices join the network, they can start transmitting without requiring extensive reconfiguration.
+\end{itemize}
+\subsection{The Shortcomings}
+\begin{itemize}
+    \item \textbf{Collisions:} One of the primary drawbacks of random access protocols is the potential for collisions, where multiple devices attempt to transmit simultaneously.
+    \item \textbf{Potential for Network Congestion:} In scenarios where many devices are trying to transmit data simultaneously, random access can lead to network congestion.
+    \item \textbf{Difficulty in Implementing Time-Sensitive Applications:} For applications that require strict timing and low latency (e.g., real-time control systems), random access protocols may not be suitable due to their inherent unpredictability.
+\end{itemize}
+\section{Maximum Packet Generation Rate for Each Spreading Factor}
+
+In this section, we calculate the maximum packet generation rate (\(\lambda(s)\)) for different spreading factors (SF) used in the LoRa communication system, given a duty cycle of 1\%. The packet generation rate is determined using the formula:
+
+\[
+\lambda(s) \leq \frac{d}{T_a(l, s)}
+\]
+Where:
+\begin{itemize}
+    \item \(\lambda(s)\) is the packet generation rate in packets per second,
+    \item \(d\) is the duty cycle (1\% or 0.01),
+    \item \(T_a(l, s)\) is the airtime of a packet for a given spreading factor \(s\), in seconds.
+\end{itemize}
+
+We will use the following values for the airtime (\(T_a\)) at different spreading factors \(s\):
+
+\[
+\begin{array}{|c|c|}
+\hline
+\text{Spreading Factor (SF)} & \text{Airtime (ToA) in ms} \\
+\hline
+\text{SF7} & 97.54 \\
+\text{SF8} & 174.59 \\
+\text{SF9} & 328.7 \\
+\text{SF10} & 616.45 \\
+\text{SF11} & 1314.82 \\
+\text{SF12} & 2301.95 \\
+\hline
+\end{array}
+\]
+
+Using the above formula, we can calculate the maximum packet generation rate for each spreading factor.
+
+\section*{Calculation of Maximum Packet Generation Rate}
+
+The maximum packet generation rate for each spreading factor is calculated as follows:
+
+\[
+\lambda(7) \leq \frac{0.01}{97.54 \, \text{ms}} = \frac{0.01}{0.09754 \, \text{s}} \approx 0.1023 \, \text{packets per second}
+\]
+
+\[
+\lambda(8) \leq \frac{0.01}{174.59 \, \text{ms}} = \frac{0.01}{0.17459 \, \text{s}} \approx 0.0573 \, \text{packets per second}
+\]
+
+\[
+\lambda(9) \leq \frac{0.01}{328.7 \, \text{ms}} = \frac{0.01}{0.3287 \, \text{s}} \approx 0.0304 \, \text{packets per second}
+\]
+
+\[
+\lambda(10) \leq \frac{0.01}{616.45 \, \text{ms}} = \frac{0.01}{0.61645 \, \text{s}} \approx 0.0162 \, \text{packets per second}
+\]
+
+\[
+\lambda(11) \leq \frac{0.01}{1314.82 \, \text{ms}} = \frac{0.01}{1.31482 \, \text{s}} \approx 0.0076 \, \text{packets per second}
+\]
+
+\[
+\lambda(12) \leq \frac{0.01}{2301.95 \, \text{ms}} = \frac{0.01}{2.30195 \, \text{s}} \approx 0.0043 \, \text{packets per second}
+\]
+
+\section*{Results}
+
+The maximum packet generation rate (\(\lambda(s)\)) for each spreading factor is summarized in the table below:
+
+\[
+\begin{array}{|c|c|}
+\hline
+\text{Spreading Factor (SF)} & \text{Maximum Packet Generation Rate} \, \lambda(s) \, (\text{packets per second}) \\
+\hline
+\text{SF7} & 0.1023 \\
+\text{SF8} & 0.0573 \\
+\text{SF9} & 0.0304 \\
+\text{SF10} & 0.0162 \\
+\text{SF11} & 0.0076 \\
+\text{SF12} & 0.0043 \\
+\hline
+\end{array}
+\]
+
+\section*{Conclusion}
+
+Based on the duty cycle limitation of 1\% and the airtime values for each spreading factor, the maximum packet generation rate decreases as the spreading factor increases. This is due to the longer airtime associated with higher spreading factors, which limits the number of packets that can be transmitted in a given time period.
+
+
+\section{Experimental}
+
+
+\subsection{First test}
+We currently have 8 devices transmitting data frames. Our test will evaluate performance using spreading factors SF=7 and SF=11, both configured with a uniform delay of 5 seconds. Each device is expected to transmit 30 frames. The objective is to verify if all frames are successfully transmitted as planned.\newline
+During the test, the results showed a significant difference in performance between the two spreading factors. For SF=11, only 76 frames were transmitted, falling short of the expected 240 frames. In contrast, SF=7 demonstrated better performance, with 175 frames successfully received.
+\newline
+For SF=11, the transmission success ratio is calculated as:
+\[
+\text{Ratio}_{\text{SF=11}} = \frac{76}{240} \approx 0.3167 \, (31.67\%).
+\]
+
+
+
+For SF=7, the transmission success ratio is:
+\[
+\text{Ratio}_{\text{SF=7}} = \frac{175}{240} \approx 0.7292 \, (72.92\%).
+\]
+
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth]{collision.png}}
+    \caption{Comparison of transmission success and failure for SF=11 and SF=7}
+    \label{Collision}
+\end{figure}
+\subsection{Second Experiment}
+We will now conduct tests using SF=9 with two different delay configurations: 1 second and 10 seconds.  
+The results indicate a success ratio of:
+\[
+\text{For delay = 1 second: } \frac{78}{240} \approx 32.5\%,
+\]
+\[
+\text{For delay = 10 seconds: } \frac{226}{240} \approx 94.17\%.
+\]
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth]{colcol.png}}
+    \caption{Transmission success and failure for SF=9 with two different delay configurations: 1 second and 10 seconds}
+    \label{Collision2}
+\end{figure}
+\section{Conclusion}
+It can be concluded that a higher spreading factor (SF) increases the time on air, thereby raising the probability of collisions occurring. Furthermore, a shorter delay results in a similar effect as having multiple devices transmitting simultaneously, which further amplifies the likelihood of collisions. This highlights the trade-off between transmission parameters and the risk of interference in the network.
+
+\end{document}
